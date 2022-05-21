@@ -46,7 +46,7 @@ namespace Menu
                                     playerInfo += OBFUSCATE("Objects Active: ");
                                     playerInfo += std::to_string((int32_t) AllPlayerControls->getSize());
 
-                                    ESP::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1,1,1,1), playerInfo.c_str());
+                                    ESP::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1, 1, 1, 1), playerInfo.c_str());
                                 }
 
                                 if(isESPList)
@@ -62,12 +62,12 @@ namespace Menu
 
                                     monoString *isPlayerName = PlayerName(_cachedData);
 
-                                    ESP::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1,1,1,1), isPlayerName->get_string_old().c_str());
+                                    ESP::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1, 1, 1, 1), isPlayerName->get_string_old().c_str());
 
                                     bool isDead = *(bool *)((uint64_t)_cachedData + offsets->isDead);
                                     std::string isAliveInfo = isDead ? OBFUSCATE("Dead") : OBFUSCATE("Alive");
 
-                                    ESP::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1,1,1,1), isAliveInfo.c_str());
+                                    ESP::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1, 1, 1, 1), isAliveInfo.c_str());
 
                                     void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
 
