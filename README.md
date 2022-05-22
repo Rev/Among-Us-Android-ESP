@@ -14,7 +14,7 @@ I made this a couple of months ago. It is a basic implementation of an ESP for A
 https://user-images.githubusercontent.com/64957743/169546510-a2fe8f3e-f137-4b35-b85a-4035e552e2e2.mp4
 
 ## Credits
-- [ByNameModding By Geokar2006](https://github.com/geokar2006/ByNameModding)
+- [ByNameModding By geokar2006](https://github.com/geokar2006/ByNameModding)
 - [UnityStuff By shmoo419](https://github.com/shmoo419/UnityStuff)
 
 ## Forum
