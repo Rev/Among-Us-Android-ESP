@@ -1,4 +1,4 @@
-# Among-Us-Android-ESP
+# Among Us Android ESP
 A basic ESP for the game 'Among Us', made specifically for Android, and updated to v2022.4.19.
 
 I made this a couple of months ago. It is a basic implementation of an ESP for Among Us, which uses ByNameModding, and shmoo's unity header. This source code will show you the basics of making an ESP from a monolist, and how to use static fields. Have fun!
