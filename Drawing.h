@@ -11,7 +11,7 @@ namespace Drawing
 
         if(background)
         {
-            background->AddLine(start, end, ImColor(color.x,color.y,color.z,color.w));
+            background->AddLine(start, end, ImColor(color.x, color.y, color.z, color.w));
         }
     }
 
@@ -36,13 +36,13 @@ namespace Drawing
         {
             if(filled)
             {
-                background->AddCircleFilled(ImVec2(X, Y), radius, ImColor(color.x,color.y,color.z,color.w));
+                background->AddCircleFilled(ImVec2(X, Y), radius, ImColor(color.x, color.y, color.z, color.w));
             }
 
             else
 
             {
-                background->AddCircle(ImVec2(X, Y), radius, ImColor(color.x,color.y,color.z,color.w));
+                background->AddCircle(ImVec2(X, Y), radius, ImColor(color.x, color.y, color.z, color.w));
             }
         }
     }
@@ -53,7 +53,7 @@ namespace Drawing
 
         if(background)
         {
-            background->AddText(NULL, fontSize, position, ImColor(color.x,color.y,color.z,color.w), text);
+            background->AddText(NULL, fontSize, position, ImColor(color.x, color.y, color.z, color.w), text);
         }
     }
 }
