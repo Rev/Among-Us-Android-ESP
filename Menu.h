@@ -46,7 +46,7 @@ namespace Menu
                                     playerInfo += OBFUSCATE("Objects Active: ");
                                     playerInfo += std::to_string((int32_t) AllPlayerControls->getSize());
 
-                                    ESP::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1, 1, 1, 1), playerInfo.c_str());
+                                    Drawing::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1, 1, 1, 1), playerInfo.c_str());
                                 }
 
                                 if(isESPList)
@@ -62,12 +62,12 @@ namespace Menu
 
                                     monoString *isPlayerName = PlayerName(_cachedData);
 
-                                    ESP::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1, 1, 1, 1), isPlayerName->get_string_old().c_str());
+                                    Drawing::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1, 1, 1, 1), isPlayerName->get_string_old().c_str());
 
                                     bool isDead = *(bool *)((uint64_t)_cachedData + offsets->isDead);
                                     std::string isAliveInfo = isDead ? OBFUSCATE("Dead") : OBFUSCATE("Alive");
 
-                                    ESP::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1, 1, 1, 1), isAliveInfo.c_str());
+                                    Drawing::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1, 1, 1, 1), isAliveInfo.c_str());
 
                                     void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
 
@@ -77,32 +77,32 @@ namespace Menu
 
                                         if(isRole == 0)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Crewmate"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Crewmate"));
                                         }
 
                                         if(isRole == 1)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Impostor"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Impostor"));
                                         }
 
                                         if(isRole == 2)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Scientist"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Scientist"));
                                         }
 
                                         if(isRole == 3)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Engineer"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Engineer"));
                                         }
 
                                         if(isRole == 4)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Guardian Angel"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Guardian Angel"));
                                         }
 
                                         if(isRole == 5)
                                         {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Shape Shifter"));
+                                            Drawing::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Shape Shifter"));
                                         }
                                     }
                                 }
@@ -124,17 +124,17 @@ namespace Menu
 
                                         if(isRole == 0)
                                         {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 0, 1, 1));
+                                            Drawing::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 0, 1, 1));
                                         }
 
                                         if(isRole == 1)
                                         {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(1, 0, 0, 1));
+                                            Drawing::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(1, 0, 0, 1));
                                         }
 
                                         if(isRole == 2 || isRole == 3 || isRole == 4 || isRole == 5)
                                         {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 1, 0, 1));
+                                            Drawing::DrawLine(ImVec2(width * 0.5f, height), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 1, 0, 1));
                                         }
                                     }
                                 }
@@ -149,17 +149,17 @@ namespace Menu
 
                                         if(isRole == 0)
                                         {
-                                            ESP::DrawBox(playerRect, ImVec4(0, 0, 1, 1));
+                                            Drawing::DrawBox(playerRect, ImVec4(0, 0, 1, 1));
                                         }
 
                                         if(isRole == 1)
                                         {
-                                            ESP::DrawBox(playerRect, ImVec4(1, 0, 0, 1));
+                                            Drawing::DrawBox(playerRect, ImVec4(1, 0, 0, 1));
                                         }
 
                                         if(isRole == 2 || isRole == 3 || isRole == 4 || isRole == 5)
                                         {
-                                            ESP::DrawBox(playerRect, ImVec4(0, 1, 0, 1));
+                                            Drawing::DrawBox(playerRect, ImVec4(0, 1, 0, 1));
                                         }
                                     }
                                 }
@@ -170,17 +170,17 @@ namespace Menu
                                     {
                                         if(get_isKillDistance(isGameOptions) == 0) //Short
                                         {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 8.35f, false, ImVec4(1, 1, 1, 1));
+                                            Drawing::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 8.35f, false, ImVec4(1, 1, 1, 1));
                                         }
 
                                         if(get_isKillDistance(isGameOptions) == 1) //Medium
                                         {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 3.85f, false, ImVec4(1, 1, 1, 1));
+                                            Drawing::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 3.85f, false, ImVec4(1, 1, 1, 1));
                                         }
 
                                         if(get_isKillDistance(isGameOptions) == 2) //Long
                                         {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 2.65f, false, ImVec4(1, 1, 1, 1));
+                                            Drawing::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 2.65f, false, ImVec4(1, 1, 1, 1));
                                         }
                                     }
                                 }
