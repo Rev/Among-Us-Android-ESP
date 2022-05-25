@@ -3,7 +3,7 @@
 
 #include "../ImGui/imgui_internal.h"
 
-namespace ESP
+namespace Drawing
 {
     void DrawLine(ImVec2 start, ImVec2 end, ImVec4 color)
     {
