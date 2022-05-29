@@ -3,7 +3,11 @@ A basic ESP for the game 'Among Us', made specifically for Android, and updated 
 
 I made this a couple of months ago. It is a basic implementation of an ESP for Among Us, which uses ByNameModding, and shmoo's unity header. This source code will show you the basics of making an ESP from a monolist, and how to use static fields. 
 
-The calculations were made specifically for 100% screen resolutions. If you use this, at least give the proper credits. Have fun!
+The calculations were made specifically for 100% screen resolutions. If you use this, at least give the proper credits. 
+
+If you would like to try the mod out yourself, you can check out a build here on [Polarmods](https://polarmods.com/threads/among-us-v2022-4-19-basic-esp-open-source.3953/).
+
+Have fun!
 
 ## Features
 - Lines.
