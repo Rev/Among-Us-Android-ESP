@@ -13,9 +13,10 @@ struct Offsets
     DWORD Camera_get_main = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Camera")).GetMethodOffsetByName(OBFUSCATE_BNM("get_main"), 0);
     DWORD Camera_WorldToScreenPoint = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Camera")).GetMethodOffsetByName(OBFUSCATE_BNM("WorldToScreenPoint"), 1);
     DWORD Transform_get_position = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Transform")).GetMethodOffsetByName(OBFUSCATE_BNM("get_position"), 0);
-    DWORD Display_get_main = LoadClass(OBFUSCATES_BNM("UnityEngine"), OBFUSCATES_BNM("Display"), OBFUSCATES_BNM("UnityEngine.CoreModule.dll")).GetMethodOffsetByName(OBFUSCATES_BNM("get_main"), 0);
-    DWORD Display_get_systemWidth = LoadClass(OBFUSCATES_BNM("UnityEngine"), OBFUSCATES_BNM("Display"), OBFUSCATES_BNM("UnityEngine.CoreModule.dll")).GetMethodOffsetByName(OBFUSCATES_BNM("get_systemWidth"), 0);
-    DWORD Display_get_systemHeight = LoadClass(OBFUSCATES_BNM("UnityEngine"), OBFUSCATES_BNM("Display"), OBFUSCATES_BNM("UnityEngine.CoreModule.dll")).GetMethodOffsetByName(OBFUSCATES_BNM("get_systemHeight"), 0);
+    DWORD Display_get_systemHeight = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Display")).GetMethodOffsetByName(OBFUSCATE_BNM("get_systemHeight"), 0);
+    DWORD Display_get_systemWidth = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Display")).GetMethodOffsetByName(OBFUSCATE_BNM("get_systemWidth"), 0);
+    DWORD Display_get_main = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Display")).GetMethodOffsetByName(OBFUSCATE_BNM("get_main"), 0);
+    DWORD Screen_SetResolution = LoadClass(OBFUSCATE_BNM("UnityEngine"), OBFUSCATE_BNM("Screen")).GetMethodOffsetByName(OBFUSCATE_BNM("SetResolution"), 3);
 
     //Methods:
     DWORD isKillDistance = LoadClass(OBFUSCATE_BNM(""), OBFUSCATE_BNM("GameOptionsData")).GetMethodOffsetByName(OBFUSCATE_BNM("get_KillDistance"), 0);
@@ -32,5 +33,4 @@ struct Offsets
 };
 
 Offsets *offsets;
-
 #endif
