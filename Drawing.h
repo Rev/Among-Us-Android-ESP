@@ -1,9 +1,13 @@
+//
+// Created by Rev on 29/05/2021.
+//
+
 #ifndef ImGuiAndroid_Drawing
 #define ImGuiAndroid_Drawing
 
 #include "../ImGui/imgui_internal.h"
 
-namespace ESP
+namespace Drawing
 {
     void DrawLine(ImVec2 start, ImVec2 end, ImVec4 color)
     {
@@ -11,7 +15,7 @@ namespace ESP
 
         if(background)
         {
-            background->AddLine(start, end, ImColor(color.x,color.y,color.z,color.w));
+            background->AddLine(start, end, ImColor(color.x, color.y, color.z, color.w));
         }
     }
 
@@ -36,13 +40,13 @@ namespace ESP
         {
             if(filled)
             {
-                background->AddCircleFilled(ImVec2(X, Y), radius, ImColor(color.x,color.y,color.z,color.w));
+                background->AddCircleFilled(ImVec2(X, Y), radius, ImColor(color.x, color.y, color.z, color.w));
             }
 
             else
 
             {
-                background->AddCircle(ImVec2(X, Y), radius, ImColor(color.x,color.y,color.z,color.w));
+                background->AddCircle(ImVec2(X, Y), radius, ImColor(color.x, color.y, color.z, color.w));
             }
         }
     }
@@ -53,7 +57,7 @@ namespace ESP
 
         if(background)
         {
-            background->AddText(NULL, fontSize, position, ImColor(color.x,color.y,color.z,color.w), text);
+            background->AddText(NULL, fontSize, position, ImColor(color.x, color.y, color.z, color.w), text);
         }
     }
 }

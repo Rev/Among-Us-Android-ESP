@@ -1,3 +1,7 @@
+//
+// Created by Rev on 29/05/2021.
+//
+
 #ifndef MENU_H
 #define MENU_H
 
@@ -13,7 +17,7 @@ namespace Menu
     {
         void *displays = Display_get_main();
 
-        if(Display_get_main != nullptr)
+        if(displays != nullptr)
         {
             width = Display_get_width(displays);
             height = Display_get_height(displays);
@@ -34,154 +38,140 @@ namespace Menu
                     {
                         void *_cachedData = *(void **) ((uint64_t) Players + offsets->isCachedData);
 
-                        if (_cachedData)
+                        if (_cachedData != nullptr)
                         {
-                            if(isESP)
+                            void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
+
+                            auto isPlayerLocation = WorldToScreenPoint(get_main(), getPosition(Players));
+
+                            if(isESPObject)
                             {
-                                auto isPlayerLocation = WorldToScreenPoint(get_main(), getPosition(Players));
+                                std::string playerInfo;
+                                playerInfo += OBFUSCATE("Objects Active: ");
+                                playerInfo += std::to_string((int32_t) AllPlayerControls->getSize());
+                                ESP::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1,1,1,1), playerInfo.c_str());
+                            }
 
-                                if(isESPObject)
+                            if(isESPList)
+                            {
+                                ImVec2 NameLocation[16];
+                                NameLocation[i] = ImVec2(width / 1.161f, (height / 1.953f) - i * 33.0f);
+
+                                ImVec2 StatusLocation[16];
+                                StatusLocation[i] = ImVec2(width / 1.041f, (height / 1.953f) - i * 33.0f);
+
+                                ImVec2 RoleLocation[16];
+                                RoleLocation[i] = ImVec2(width / 1.356f, (height / 1.953f) - i * 33.0f);
+
+                                monoString *isPlayerName = PlayerName(_cachedData);
+
+                                ESP::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1,1,1,1), isPlayerName->get_string_old().c_str());
+
+                                bool isDead = *(bool *)((uint64_t)_cachedData + offsets->isDead);
+                                std::string isAliveInfo = isDead ? OBFUSCATE("Dead") : OBFUSCATE("Alive");
+
+                                ESP::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1,1,1,1), isAliveInfo.c_str());
+
+                                if(isRoleBehaviour != nullptr)
                                 {
-                                    std::string playerInfo;
-                                    playerInfo += OBFUSCATE("Objects Active: ");
-                                    playerInfo += std::to_string((int32_t) AllPlayerControls->getSize());
+                                    int isRole = *(int *)((uint64_t)isRoleBehaviour + offsets->isRoleType);
 
-                                    ESP::DrawText2(height * 0.065f, ImVec2(height * 0.830f,  width * 0.01f), ImVec4(1,1,1,1), playerInfo.c_str());
-                                }
-
-                                if(isESPList)
-                                {
-                                    ImVec2 NameLocation[15];
-                                    NameLocation[i] = ImVec2(width / 1.161f, (height / 1.953f) - i * 33.0f);
-
-                                    ImVec2 StatusLocation[15];
-                                    StatusLocation[i] = ImVec2(width / 1.041f, (height / 1.953f) - i * 33.0f);
-
-                                    ImVec2 RoleLocation[15];
-                                    RoleLocation[i] = ImVec2(width / 1.356f, (height / 1.953f) - i * 33.0f);
-
-                                    monoString *isPlayerName = PlayerName(_cachedData);
-
-                                    ESP::DrawText2(height * 0.035f, NameLocation[i], ImVec4(1,1,1,1), isPlayerName->get_string_old().c_str());
-
-                                    bool isDead = *(bool *)((uint64_t)_cachedData + offsets->isDead);
-                                    std::string isAliveInfo = isDead ? OBFUSCATE("Dead") : OBFUSCATE("Alive");
-
-                                    ESP::DrawText2(height * 0.035f, StatusLocation[i], ImVec4(1,1,1,1), isAliveInfo.c_str());
-
-                                    void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
-
-                                    if(isRoleBehaviour)
+                                    if(isRole == 0)
                                     {
-                                        int isRole = *(int *)((uint64_t)isRoleBehaviour + offsets->isRoleType);
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Crewmate"));
+                                    }
 
-                                        if(isRole == 0)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Crewmate"));
-                                        }
+                                    if(isRole == 1)
+                                    {
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Impostor"));
+                                    }
 
-                                        if(isRole == 1)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Impostor"));
-                                        }
+                                    if(isRole == 2)
+                                    {
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Scientist"));
+                                    }
 
-                                        if(isRole == 2)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Scientist"));
-                                        }
+                                    if(isRole == 3)
+                                    {
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Engineer"));
+                                    }
 
-                                        if(isRole == 3)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Engineer"));
-                                        }
+                                    if(isRole == 4)
+                                    {
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Guardian Angel"));
+                                    }
 
-                                        if(isRole == 4)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Guardian Angel"));
-                                        }
-
-                                        if(isRole == 5)
-                                        {
-                                            ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Shape Shifter"));
-                                        }
+                                    if(isRole == 5)
+                                    {
+                                        ESP::DrawText2(height * 0.035f, RoleLocation[i], ImVec4(1, 1, 1, 1), OBFUSCATE("Shape Shifter"));
                                     }
                                 }
+                            }
 
-                                float isBoxWidth = (float) width / 16.0f;
-                                float isBoxHeight = (float) height / 10.0f;
+                            float isBoxWidth = (float) width / 16.0f;
+                            float isBoxHeight = (float) height / 10.0f;
 
-                                Vector2 isLocator = Vector2(isPlayerLocation.X, height - isPlayerLocation.Y);
-                                Rect playerRect(isLocator.X - (isBoxHeight / 2), isLocator.Y - (isBoxWidth / 2), isBoxHeight, isBoxWidth);
+                            Vector2 isLocator = Vector2(isPlayerLocation.X, height - isPlayerLocation.Y);
+                            Rect playerRect(isLocator.X - (isBoxHeight / 2), isLocator.Y - (isBoxWidth / 2), isBoxHeight, isBoxWidth);
+
+                            if(isRoleBehaviour != nullptr)
+                            {
+                                int isRole = *(int *)((uint64_t)isRoleBehaviour + offsets->isRoleType);
 
                                 if(isESPLine)
                                 {
-                                    void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
-
-                                    if(isRoleBehaviour)
+                                    if(isRole == 0)
                                     {
+                                        ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 0, 1, 1));
+                                    }
 
-                                        int isRole = *(int *)((uint64_t)isRoleBehaviour + offsets->isRoleType);
+                                    if(isRole == 1 || isRole == 5)
+                                    {
+                                        ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(1, 0, 0, 1));
+                                    }
 
-                                        if(isRole == 0)
-                                        {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 0, 1, 1));
-                                        }
-
-                                        if(isRole == 1)
-                                        {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(1, 0, 0, 1));
-                                        }
-
-                                        if(isRole == 2 || isRole == 3 || isRole == 4 || isRole == 5)
-                                        {
-                                            ESP::DrawLine(ImVec2(width * 0.5f, height), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 1, 0, 1));
-                                        }
+                                    if(isRole == 2 || isRole == 3 || isRole == 4)
+                                    {
+                                        ESP::DrawLine(ImVec2(width * 0.5f, height * 0.5f), ImVec2(isPlayerLocation.X, height - isPlayerLocation.Y), ImVec4(0, 1, 0, 1));
                                     }
                                 }
 
-                                if (isESPBox)
+                                if(isESPBox)
                                 {
-                                    void *isRoleBehaviour = *(void **) ((uint64_t) _cachedData + offsets->isRole);
-
-                                    if(isRoleBehaviour)
+                                    if(isRole == 0)
                                     {
-                                        int isRole = *(int *)((uint64_t)isRoleBehaviour + offsets->isRoleType);
+                                        ESP::DrawBox(playerRect, ImVec4(0, 0, 1, 1));
+                                    }
 
-                                        if(isRole == 0)
-                                        {
-                                            ESP::DrawBox(playerRect, ImVec4(0, 0, 1, 1));
-                                        }
+                                    if(isRole == 1 || isRole == 5)
+                                    {
+                                        ESP::DrawBox(playerRect, ImVec4(1, 0, 0, 1));
+                                    }
 
-                                        if(isRole == 1)
-                                        {
-                                            ESP::DrawBox(playerRect, ImVec4(1, 0, 0, 1));
-                                        }
-
-                                        if(isRole == 2 || isRole == 3 || isRole == 4 || isRole == 5)
-                                        {
-                                            ESP::DrawBox(playerRect, ImVec4(0, 1, 0, 1));
-                                        }
+                                    if(isRole == 2 || isRole == 3 || isRole == 4)
+                                    {
+                                        ESP::DrawBox(playerRect, ImVec4(0, 1, 0, 1));
                                     }
                                 }
+                            }
 
-                                if(isGameOptions != nullptr)
+                            if(isGameOptions != nullptr)
+                            {
+                                if(isESPKillDistance)
                                 {
-                                    if(isESPKillDistance)
+                                    if(get_isKillDistance(isGameOptions) == 0) //Short
                                     {
-                                        if(get_isKillDistance(isGameOptions) == 0) //Short
-                                        {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 8.35f, false, ImVec4(1, 1, 1, 1));
-                                        }
+                                        ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 8.35f, false, ImVec4(1, 1, 1, 1));
+                                    }
 
-                                        if(get_isKillDistance(isGameOptions) == 1) //Medium
-                                        {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 3.85f, false, ImVec4(1, 1, 1, 1));
-                                        }
+                                    if(get_isKillDistance(isGameOptions) == 1) //Medium
+                                    {
+                                        ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 3.85f, false, ImVec4(1, 1, 1, 1));
+                                    }
 
-                                        if(get_isKillDistance(isGameOptions) == 2) //Long
-                                        {
-                                            ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 2.65f, false, ImVec4(1, 1, 1, 1));
-                                        }
+                                    if(get_isKillDistance(isGameOptions) == 2) //Long
+                                    {
+                                        ESP::DrawCircle(isLocator.X - (isBoxHeight / 20.0f), isLocator.Y - (isBoxHeight / 20.0f), height / 2.65f, false, ImVec4(1, 1, 1, 1));
                                     }
                                 }
                             }
@@ -220,6 +210,7 @@ namespace Menu
             }
 
             ImGui::End();
+
         }
 
     }
