@@ -21,6 +21,7 @@ namespace Menu
         {
             width = Display_get_width(displays);
             height = Display_get_height(displays);
+            Screen_SetResolution(width, height, true);
 
             ImGui::SetNextWindowSize(ImVec2(width * 0.9, height * 0.8));
             ImGui::Begin(OBFUSCATE("Among Us - Player List By Rev"));
